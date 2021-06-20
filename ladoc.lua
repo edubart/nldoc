@@ -84,9 +84,34 @@ The `data` buffer is 0-indexed (unlike string APIs).
     include_names={hashnodeT=true, hashmapT=true}
   })
 
-  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/interface.nelua', {
-    name='allocators.interface',
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/default.nelua', {
+    name='allocators.default',
+  })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/allocator.nelua', {
+    name='allocators.allocator',
     include_names={Allocator=true}
+  })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/general.nelua', {
+    name='allocators.general',
+  })
+  -- gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/gc.nelua', {
+  --   name='allocators.gc',
+  -- })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/arena.nelua', {
+    name='allocators.arena',
+    include_names={ArenaAllocatorT=true}
+  })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/stack.nelua', {
+    name='allocators.stack',
+    include_names={StackAllocatorT=true}
+  })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/pool.nelua', {
+    name='allocators.pool',
+    include_names={PoolAllocatorT=true}
+  })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/heap.nelua', {
+    name='allocators.heap',
+    include_names={HeapAllocatorT=true}
   })
 
   emitter:add[[
