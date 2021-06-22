@@ -326,15 +326,24 @@ local parser = require'ladoc.parser'.create(grammar, comments_grammar, errors, d
 local lpegrex = require 'lpegrex'
 local util = require 'ladoc.util'
 
+local function rtrimcomment(text)
+  text = text:gsub('%s*%-%-%[=*%[.*$', '') -- trim multi line comments
+  repeat
+    local n
+    text, n = text:gsub('%s%-%-[^\n]*%s*$', '')
+  until n == 0
+  return text
+end
+
 -- Trim unwanted text in declarations.
 local function trimdecl(text)
-  return text:gsub('%s*%-%-.*$', '') -- remove trailing comments
+  return rtrimcomment(text) -- remove trailing comments
              :gsub('%s*$', '') -- remove trailing spaces
              :gsub('%s*%b<>$', '') -- remove annotations
 end
 
 local function trimdef(text)
-  text = text:gsub('%s*%-%-.*$', '') -- remove trailing comments
+  text = rtrimcomment(text) -- remove trailing comments
              :gsub('%s*$', '') -- remove trailing spaces
 
   return text

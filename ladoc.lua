@@ -94,9 +94,9 @@ The `data` buffer is 0-indexed (unlike string APIs).
   gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/general.nelua', {
     name='allocators.general',
   })
-  -- gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/gc.nelua', {
-  --   name='allocators.gc',
-  -- })
+  gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/gc.nelua', {
+    name='allocators.gc',
+  })
   gendoc(emitter, '/home/bart/projects/nelua/nelua-lang/lib/allocators/arena.nelua', {
     name='allocators.arena',
     include_names={ArenaAllocatorT=true}
