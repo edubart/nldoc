@@ -22,13 +22,9 @@ local function walk_nodes(ast)
   return coroutine.wrap(walk_nodes_iterator), ast
 end
 
---[[
-Read a file and return its contents as string.
-In case of failure, returns nil plus and error.
-]]
+-- Read a file and return its contents as string.
 local function read_file(filename)
-  local file, err = io.open(filename)
-  if not file then return err end
+  local file, err = assert(io.open(filename))
   local contents = file:read("*a")
   file:close()
   return contents
@@ -36,10 +32,9 @@ end
 
 -- Write contents to a file.
 local function write_file(filename, contents)
-  local file, err = io.open(filename,'w')
-  if not file then return nil, err end
-  file:write(contents)
-  file:close()
+  local file, err = assert(io.open(filename,'w'))
+  assert(file:write(contents))
+  assert(file:close())
   return true
 end
 

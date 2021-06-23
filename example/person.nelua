@@ -1,0 +1,28 @@
+--[[
+Person library.
+
+This library is just an example for documentation.
+]]
+
+require 'allocators.default'
+
+-- Person record.
+global Person = @record{
+  name: string, -- Full name.
+  age: integer, -- Years since birth.
+}
+
+-- Creates a new person with `name` and `age`.
+function Person.create(name: string, age: integer): *Person
+  return new((@Person){name = name, age = age})
+end
+
+-- Returns the person name.
+function Person:get_name(): string
+  return self.name
+end
+
+-- Returns the person age.
+function Person:get_age(): integer
+  return self.age
+end

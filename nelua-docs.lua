@@ -2,8 +2,10 @@ local nldoc = require 'nldoc'
 
 -- Generate standard libraries documentation.
 local function gen_stdlib(neluadir)
+  -- emitter used to concatenate documentation text
   local emitter = nldoc.Emitter.create()
 
+  -- add documentation heading
   emitter:add[[
 ---
 layout: docs
@@ -22,6 +24,7 @@ To use a library, use `require 'libraryname'`{:.language-nelua}.
 
 ]]
 
+  -- parse and generate documentation for many sources
   nldoc.generate_doc(emitter, neluadir..'/lib/builtins.nelua')
   nldoc.generate_doc(emitter, neluadir..'/lib/arg.nelua')
   nldoc.generate_doc(emitter, neluadir..'/lib/iterators.nelua')
@@ -106,17 +109,23 @@ The `data` buffer is 0-indexed (unlike string APIs).
     include_names={HeapAllocatorT=true}
   })
 
+  -- add documentation footer
   emitter:add[[
 
 <a href="/clibraries/" class="btn btn-outline-primary btn-lg float-right">C Libraries >></a>
 ]]
 
-  nldoc.write_file(neluadir..'/docs/pages/libraries.md', emitter:generate())
+  -- generate the documentation file
+  local docfile = neluadir..'/docs/pages/libraries.md'
+  nldoc.write_file(docfile, emitter:generate())
+  print('generated', docfile)
 end
 
 -- Generate C libraries documentation.
 local function gen_clib(neluadir)
   local emitter = nldoc.Emitter.create()
+
+  -- add documentation heading
   emitter:add[[
 ---
 layout: docs
@@ -139,7 +148,8 @@ these are provided just as convenience for interoperating with C libraries.
 {:.alert.alert-info}
 
 ]]
-  -- nldoc.generate_doc(emitter, neluadir..'/lib/C/init.nelua', {name='C',include_names={C=true}})
+
+  -- parse and generate documentation for many sources
   nldoc.generate_doc(emitter, neluadir..'/lib/C/arg.nelua', {name='C.arg',include_names={C=true}})
   nldoc.generate_doc(emitter, neluadir..'/lib/C/ctype.nelua', {name='C.ctype',include_names={C=true}})
   nldoc.generate_doc(emitter, neluadir..'/lib/C/errno.nelua', {name='C.errno',include_names={C=true}})
@@ -152,7 +162,10 @@ these are provided just as convenience for interoperating with C libraries.
   nldoc.generate_doc(emitter, neluadir..'/lib/C/string.nelua', {name='C.string',include_names={C=true}})
   nldoc.generate_doc(emitter, neluadir..'/lib/C/time.nelua', {name='C.time',include_names={C=true}})
 
-  nldoc.write_file(neluadir..'/docs/pages/clibraries.md', emitter:generate())
+  -- generate the documentation file
+  local docfile = neluadir..'/docs/pages/clibraries.md'
+  nldoc.write_file(docfile, emitter:generate())
+  print('generated', docfile)
 end
 
 if not arg[1] then
@@ -160,6 +173,7 @@ if not arg[1] then
   os.exit(1)
 end
 
+-- Generate documentation for Nelua libraries.
 local neluadir = arg[1]
 gen_stdlib(neluadir)
 gen_clib(neluadir)
