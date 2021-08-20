@@ -161,6 +161,8 @@ these are provided just as convenience for interoperating with C libraries.
   nldoc.generate_doc(emitter, neluadir..'/lib/C/stdlib.nelua', {name='C.stdlib',include_names={C=true}})
   nldoc.generate_doc(emitter, neluadir..'/lib/C/string.nelua', {name='C.string',include_names={C=true}})
   nldoc.generate_doc(emitter, neluadir..'/lib/C/time.nelua', {name='C.time',include_names={C=true}})
+  nldoc.generate_doc(emitter, neluadir..'/lib/C/threads.nelua', {name='C.threads',include_names={C=true}})
+  nldoc.generate_doc(emitter, neluadir..'/lib/C/stdatomic.nelua', {name='C.stdatomic',include_names={C=true}})
 
   -- generate the documentation file
   local docfile = neluadir..'/docs/pages/clibraries.md'
